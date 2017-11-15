@@ -18,5 +18,5 @@ To calculate it system uses output of the Action part of the code together with 
 In the first part of the code, to initialise spline, the last two points of the previous trajectory (or the car position if previous trajectory is not present) together with three points in a distance are used.
 Those points are used for spline calculation and the coordinates are transformed to the car's local coordinates.
 The previous trajectory points are copied to the new trajectory in order to ensure its continuity. Remaining points are calculated based on the spline.
-The speed chagne is decided based on the Action result and it is applied on complete trajectory. I tried applying speed chagne on every trajectory points but that resulted in less "smooth" driving experience.
+The speed chagne is decided based on the Action result and it is applied on complete trajectory. I tried applying speed change on every trajectory points but that resulted in minor differences in vehicle behaviour.
 _Possible improvement_ for this part of the code would be to better manage speed changes in case when we can't change the lane. The ego car could keep more "constant" speed based on the speed of the car that is ahead of it.
