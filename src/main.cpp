@@ -244,7 +244,7 @@ int main() {
                       car_s = end_path_s;
                     }
 
-                    // predict other cars position
+                    // PREDICTION
                     bool car_ahead = false;
                     bool car_left = false;
                     bool car_right = false;
@@ -284,7 +284,7 @@ int main() {
                       }
                     }
 
-                    // act on predictions
+                    // ACTION
                     double speed_diff = 0;
                     const double MAX_SPEED = 49.5;
                     const double MAX_ACC = .224;
@@ -313,6 +313,8 @@ int main() {
                       }
                     }
 
+
+                    // TRAJECTORY
                     vector<double> ptsx;
                     vector<double> ptsy;
 
@@ -390,13 +392,14 @@ int main() {
 
                     double x_add_on = 0;
 
+                    ref_vel += speed_diff;
+                    if (ref_vel > MAX_SPEED) {
+                      ref_vel = MAX_SPEED;
+                    } else if (ref_vel < MAX_ACC) {
+                      ref_vel = MAX_ACC;
+                    }
+
                     for (int i = 1; i < 50 - prev_size; i++) {
-                      ref_vel += speed_diff;
-                      if (ref_vel > MAX_SPEED) {
-                        ref_vel = MAX_SPEED;
-                      } else if (ref_vel < MAX_ACC) {
-                        ref_vel = MAX_ACC;
-                      }
                       double N = target_dist / (0.02 * ref_vel / 2.24);
                       double x_point = x_add_on + target_x / N;
                       double y_point = s(x_point);
